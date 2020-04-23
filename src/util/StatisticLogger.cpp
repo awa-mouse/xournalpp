@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <ctime>
+#include "Util.h"
 
 static gboolean DumpTask(gpointer data) {
     ((StatisticLogger *)data)->dump();
@@ -48,7 +49,8 @@ void StatisticLogger::dump() {
 }
 
 void StatisticLogger::dumpStr(std::string str) {
-    FILE *f = fopen("statistic.log", "a");
+    auto fname = Util::getConfigFile("statistic.log").str();
+    FILE *f = fopen(fname.c_str(), "a");
     fputs((str + '\n').c_str(), f);
     fclose(f);
 }
