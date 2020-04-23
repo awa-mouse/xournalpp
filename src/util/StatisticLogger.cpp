@@ -30,7 +30,7 @@ void StatisticLogger::init() {
 }
 
 void StatisticLogger::finish() {
-    dumpStr(textDump() + '\n' + GetDateTimeNowIso8601() + " stop xournalpp.");
+    dumpStr( (count==0? "" : (textDump() + '\n')) + GetDateTimeNowIso8601() + " stop xournalpp.");
 }
 
 std::string StatisticLogger::textDump() {
