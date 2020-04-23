@@ -4,6 +4,7 @@
 
 #include "StylusInputHandler.h"
 #include "InputContext.h"
+#include "StatisticLogger.h"
 
 #include <gui/widgets/XournalWidget.h>
 #include "gui/XournalppCursor.h"
@@ -39,6 +40,8 @@ bool StylusInputHandler::handleImpl(InputEvent* event)
 	// Trigger start of action when pen/mouse is pressed
 	if (event->type == BUTTON_PRESS_EVENT)
 	{
+
+		StatisticLogger::getInstance().log();
 
 		if (event->button == 1 || this->inputContext->getSettings()->getInputSystemTPCButtonEnabled())
 		{

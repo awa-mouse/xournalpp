@@ -22,6 +22,7 @@
 #include "StringUtils.h"
 #include "XojMsgBox.h"
 #include "util/cpp14memory.h"
+#include "util/StatisticLogger.h"
 
 #include <libintl.h>
 #include <gtk/gtk.h>
@@ -366,6 +367,9 @@ int XournalMain::run(int argc, char* argv[])
 	string colorNameFile = Util::getConfigFile("colornames.ini").str();
 	ToolbarColorNames::getInstance().loadFile(colorNameFile);
 
+	StatisticLogger::getInstance().init();
+
+
 	Control* control = new Control(gladePath);
 
 	string icon = gladePath->getFirstSearchPath() + "/icons/";
@@ -435,6 +439,8 @@ int XournalMain::run(int argc, char* argv[])
 	delete win;
 	delete control;
 	delete gladePath;
+
+	StatisticLogger::getInstance().finish();
 
 	ToolbarColorNames::getInstance().saveFile(colorNameFile);
 	ToolbarColorNames::freeInstance();
